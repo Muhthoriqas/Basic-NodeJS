@@ -2,8 +2,9 @@ const http = require("http");
 const { chunk } = require("lodash");
 
 const requireListener = (request, response) => {
-  response.setHeader = ("Content-Type", "text/html");
-  let { statusCode } = response;
+  //! Respon Header
+  response.setHeader("Content-Type", "application/json");
+  // response.setHeader("X-Powered-By", "NodeJS");
 
   //! Method/Verb Request
   const { method } = request;
@@ -18,23 +19,58 @@ const requireListener = (request, response) => {
 
   if (url === "/") {
     if (method === "GET") {
-      response.end("Hello");
-      console.log(statusCode);
+      //! Respon Status
+      response.statusCode = 200;
+
+      //!  Respon Body
+      response.end(
+        JSON.stringify({
+          message: "Hello",
+        })
+      );
     } else {
-      response.end(`Halaman tidak dapat diakses dengan "${method}" request`);
+      response.statusCode = 405;
+      response.end(
+        JSON.stringify({
+          message: `Halaman tidak dapat diakses dengan "${method}" request`,
+        })
+      );
     }
   } else if (url === "/about") {
     if (method === "GET") {
-      response.end("Hello ini /about");
+      response.statusCode = 200;
+      response.end(
+        JSON.stringify({
+          message: "Hello  ini /about",
+        })
+      );
     } else if (method === "POST") {
       request.on("end", () => {
         body = Buffer.concat(body).toString();
         const { name, umur } = JSON.parse(body);
-        response.end(`Halo,  ${name} umur ${umur}! Ini adalah halaman about`);
+        response.statusCode = 200;
+
+        response.end(
+          JSON.stringify({
+            message: `Halo, ${name}! umur ${umur} Ini adalah halaman about`,
+          })
+        );
+        // response.end(`Hello ${name}, ${umur}`);
       });
+    } else {
+      response.statusCode = 405;
+      response.end(
+        JSON.stringify({
+          message: `Halaman tidak dapat diakses dengan "${method}" request`,
+        })
+      );
     }
   } else {
-    response.end("Halaman tidak ditemukan");
+    response.statusCode = 404;
+    const message = {
+      message: "Halaman tidak ditemukan",
+    };
+    response.end(JSON.stringify(message));
   }
 };
 
