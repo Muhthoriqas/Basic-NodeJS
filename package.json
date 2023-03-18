@@ -1,9 +1,10 @@
 {
   "devDependencies": {
+    "jest": "^29.5.0",
     "nodemon": "^2.0.21"
   },
   "scripts": {
-    "start": "node ./Server/server.js",
+    "start": "nodemon ./Server/server.js",
     "dev": "nodemon ./Modularization/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
