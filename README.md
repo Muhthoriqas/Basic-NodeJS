@@ -33,4 +33,4 @@ To use any of the scripts in this repository, follow these steps:
 If you have any Bash scripts that you would like to share or any improvements to suggest, feel free to contribute to this repository! Fork the repository, make your changes, and submit a pull request.
 
 ## License
-This repository is licensed under the MIT License. See the LICENSE file for more information.
+This repository is licensed under the MIT License. See the <a href="https://github.com/Muhthoriqas/Basic-NodeJS/blob/master/LICENSE">LICENSE</a> file for more information.
