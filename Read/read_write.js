@@ -2,7 +2,7 @@ const fs = require("fs");
 
 fs.readFile("./assets/tex.txt", "utf-8", (err, data) => {
   if (err) throw err;
-  console.log("Sucessfully loaded");
+  console.log("Sucessfully");
   console.log(data);
 });
 
