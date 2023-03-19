@@ -12,7 +12,6 @@ const yourName = process.argv;
 const environment = process.argv;
 
 for (let i = 0; i <= 10000; i++) {
-  // Proses looping ini akan membuat penggunaan memori naik
   result = 1 + i;
 }
 
