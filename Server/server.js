@@ -1,9 +1,9 @@
-const http = require("http");
-const { chunk } = require("lodash");
+const http = require('http');
+const { chunk } = require('lodash');
 
 const requireListener = (request, response) => {
   //! Respon Header
-  response.setHeader("Content-Type", "application/json");
+  response.setHeader('Content-Type', 'application/json');
   // response.setHeader("X-Powered-By", "NodeJS");
 
   //! Method/Verb Request
@@ -13,19 +13,19 @@ const requireListener = (request, response) => {
   //! Body Request
   let body = [];
 
-  request.on("data", (chuck) => {
+  request.on('data', (chuck) => {
     body.push(chuck);
   });
 
-  if (url === "/") {
-    if (method === "GET") {
+  if (url === '/') {
+    if (method === 'GET') {
       //! Respon Status
       response.statusCode = 200;
 
       //!  Respon Body
       response.end(
         JSON.stringify({
-          message: "Hello",
+          message: 'Hello',
         })
       );
     } else {
@@ -36,16 +36,16 @@ const requireListener = (request, response) => {
         })
       );
     }
-  } else if (url === "/about") {
-    if (method === "GET") {
+  } else if (url === '/about') {
+    if (method === 'GET') {
       response.statusCode = 200;
       response.end(
         JSON.stringify({
-          message: "Hello  ini /about",
+          message: 'Hello  ini /about',
         })
       );
-    } else if (method === "POST") {
-      request.on("end", () => {
+    } else if (method === 'POST') {
+      request.on('end', () => {
         body = Buffer.concat(body).toString();
         const { name, umur } = JSON.parse(body);
         response.statusCode = 200;
@@ -68,7 +68,7 @@ const requireListener = (request, response) => {
   } else {
     response.statusCode = 404;
     const message = {
-      message: "Halaman tidak ditemukan",
+      message: 'Halaman tidak ditemukan',
     };
     response.end(JSON.stringify(message));
   }
@@ -77,9 +77,9 @@ const requireListener = (request, response) => {
 const server = http.createServer(requireListener);
 
 const port = 5000;
-const host = "localhost";
+const host = 'localhost';
 
 server.listen(port, host, (name) => {
-  name = "Thoriq";
+  name = 'Thoriq';
   console.log(`Server ${name} berjalan  di http://${host}:${port}`);
 });
